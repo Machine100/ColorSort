@@ -31,9 +31,12 @@ export class DisplaycontrolService {
     this.cursorColumn = 0
     let row = 0
     let column = 0
-    this.board = [ [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[] ]
-    for (row = 0; row < 20; row++) {
-      for (column = 0; column < 20; column++) {
+    this.board = [ [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],   // a 64x64 grid
+                   [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],   //
+                   [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],   //
+                   [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[] ]  //
+    for (row = 0; row < 64; row++) {
+      for (column = 0; column < 64; column++) {
           this.board[row][column] = {
             id: row.toString() + '_' + column.toString(),
             shortestPath: false,
@@ -58,8 +61,8 @@ export class DisplaycontrolService {
     redrawBoard() {
     let row = 0
     let column = 0
-    for (row = 0; row < 20; row++) {
-      for (column = 0; column < 20; column++) {
+    for (row = 0; row < 64; row++) {
+      for (column = 0; column < 64; column++) {
         const id: string = this.getId(row, column)
         const shortestPath: boolean = this.board[row][column].shortestPath
         const up: boolean = this.board[row][column].wallUp
@@ -206,4 +209,29 @@ export class DisplaycontrolService {
         this.board[this.cursorRow][this.cursorColumn - 1].wallRight = false
       }
   }
+
+  private _delayTimer() {
+    return new Promise((resolve) => {
+      setTimeout ( () => {
+        resolve()
+      }, 30)                                    // set to 30 for production
+    })
+  }
+
+  async fillAll() {
+    for (let k=0; k<50; k++) {
+      for (let row = 0; row < 64; row++) {
+        for (let column = 0; column < 64; column++) {
+          const id: string = this.getId(row, column)
+          const randomColorCode = Math.floor(Math.random() * 4)
+          if (randomColorCode === 0) {document.getElementById(id).style.backgroundColor = '#CCCCCC' }
+          if (randomColorCode === 1) {document.getElementById(id).style.backgroundColor = '#111111' }
+          if (randomColorCode === 2) {document.getElementById(id).style.backgroundColor = '#555555' }
+          if (randomColorCode === 3) {document.getElementById(id).style.backgroundColor = '#888888' }
+        }
+      }
+      await this._delayTimer()
+    }
+  }
+
 }

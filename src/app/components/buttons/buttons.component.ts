@@ -67,4 +67,8 @@ export class ButtonsComponent implements OnInit {
     document.getElementById('generate-button').style.color = '#3ffd1c'
     document.getElementById('solve-button').style.color = '#3ffd1c'
   }
+
+  onFillAll() {
+    this.displayControl.fillAll()
+  }
 }
