@@ -16,6 +16,5 @@ export class DisplayComponent implements OnInit {
   onClick(id: string) {
     console.log('click at ', id)
     const idRowCol: number[] = this.displayControl.getRowColumn(id)
-    this.displayControl.markBlocked(idRowCol[0], idRowCol[1])
   }
 }

@@ -106,19 +106,6 @@ export class DisplaycontrolService {
       }
     }
   }
-
-  // fillCell (row:number, column:number) {
-  //   const id:string = this.getId(row, column)
-  //   this.board[row][column].filled = true                // update state
-  //   this.redrawBoard()
-  // }
-
-  // clearCell (row:number, column:number) {
-  //   const id:string = this.getId(row, column)
-  //   this.board[row][column].filled = true                // update state
-  //   this.redrawBoard()
-  // }
-
   markStart(row: number, column: number) {
     const id: string = this.getId(row, column)
     this.board[row][column].startCell = true                // update board state
@@ -147,69 +134,6 @@ export class DisplaycontrolService {
     document.getElementById(id).classList.add('discovered')   // directly draw state change to view
   }
 
-  markExplored(row: number, column: number) {
-     this.board[row][column].explored = true                   // update board state
-     const id: string = this.getId(row, column)
-     document.getElementById(id).classList.add('explored')     // directly draw state change to view
-  }
-
-  markOffStack(row: number, column: number) {
-     this.board[row][column].onStack = false                   // update board state
-     const id: string = this.getId(row, column)
-     document.getElementById(id).classList.remove('on-stack')  // directly draw state change to view
-  }
-
-  markOnStack(row: number, column: number) {
-     this.board[row][column].onStack = true                    // update board state
-     const id: string = this.getId(row, column)
-     // document.getElementById(id).classList.add('on-stack')  // directly draw state change to view
-     this.redrawBoard()
-  }
-
-  markBlocked(row: number, column: number) {
-     this.board[row][column].blocked = true                     // update board state
-     const id: string = this.getId(row, column)
-     document.getElementById(id).classList.add('blocked')       // directly draw state change to view
-  }
-
-  markShortestPath(row: number, column: number) {
-    this.board[row][column].shortestPath = true                 // update board state
-    const id: string = this.getId(row, column)
-    document.getElementById(id).classList.add('shortest-path')  // directly draw state change to view
-  }
-
-  moveCursor(destinationRow: number, destinationColumn: number) {
-    this.board[this.cursorRow][this.cursorColumn].hasCursor = false        // update view state and
-    let cursorId: string = this.getId(this.cursorRow, this.cursorColumn)   // update view CSS
-    document.getElementById(cursorId).classList.remove('has-cursor')       // to remove previous cursor location
-    this.cursorColumn = destinationColumn                                  // change the cursor location
-    this.cursorRow = destinationRow
-    this.board[destinationRow][destinationColumn].hasCursor = true         // update view state and
-    cursorId = this.getId(this.cursorRow, this.cursorColumn)               // update view CSS
-    document.getElementById(cursorId).classList.add('has-cursor')          // to reflect new cursor location
-    // console.log('currentcursorRow',this.cursorRow,'currentcursorColumn:',this.cursorColumn)
-  }
-
-  knockoutWalls(direction: string) {
-    switch (direction) {
-      case 'down':
-        this.board[this.cursorRow][this.cursorColumn].wallDown = false
-        this.board[this.cursorRow + 1][this.cursorColumn].wallUp = false
-        break
-      case 'right':
-        this.board[this.cursorRow][this.cursorColumn].wallRight = false
-        this.board[this.cursorRow][this.cursorColumn + 1].wallLeft = false
-        break
-      case 'up':
-        this.board[this.cursorRow][this.cursorColumn].wallUp = false
-        this.board[this.cursorRow - 1][this.cursorColumn].wallDown = false
-        break
-      case 'left':
-        this.board[this.cursorRow][this.cursorColumn].wallLeft = false
-        this.board[this.cursorRow][this.cursorColumn - 1].wallRight = false
-      }
-  }
-
   private _delayTimer() {
     return new Promise((resolve) => {
       setTimeout ( () => {
@@ -224,10 +148,10 @@ export class DisplaycontrolService {
         for (let column = 0; column < 64; column++) {
           const id: string = this.getId(row, column)
           const randomColorCode = Math.floor(Math.random() * 4)
-          if (randomColorCode === 0) {document.getElementById(id).style.backgroundColor = '#CCCCCC' }
-          if (randomColorCode === 1) {document.getElementById(id).style.backgroundColor = '#111111' }
-          if (randomColorCode === 2) {document.getElementById(id).style.backgroundColor = '#555555' }
-          if (randomColorCode === 3) {document.getElementById(id).style.backgroundColor = '#888888' }
+          if (randomColorCode === 0) {document.getElementById(id).style.backgroundColor = '#000080' }
+          if (randomColorCode === 1) {document.getElementById(id).style.backgroundColor = '#582F00' }
+          if (randomColorCode === 2) {document.getElementById(id).style.backgroundColor = '#004E96' }
+          if (randomColorCode === 3) {document.getElementById(id).style.backgroundColor = '#AFA8BA' }
         }
       }
       await this._delayTimer()

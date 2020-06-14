@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DisplaycontrolService } from 'src/app/displaycontrol.service';
-import { BreadthfirstService } from 'src/app/algorithms/breadthfirst.service';
-import { MazerecursivebacktrackerService } from 'src/app/algorithms/mazerecursivebacktracker.service';
+// import { BreadthfirstService } from 'src/app/algorithms/breadthfirst.service';
+// import { MazerecursivebacktrackerService } from 'src/app/algorithms/mazerecursivebacktracker.service';
 import { Button } from 'protractor';
 
 @Component({
@@ -21,39 +21,19 @@ export class ButtonsComponent implements OnInit {
 
   constructor(
     private displayControl: DisplaycontrolService,
-    private breadthfirst: BreadthfirstService,
-    private mazeRecursiveBacktracker: MazerecursivebacktrackerService) {}
+    ) {}
 
   ngOnInit() {                                   // initalize everything on the board
     this.displayControl.initBoard()
-    this.displayControl.markStart(2, 2)
-    this.displayControl.markFinish(17, 17)
     this.displayControl.redrawBoard()
     this.generateButtonDepressed = false; this.mazeGenerated = false; this.mazeGenerating = false
     this.solveButtonDepressed = false; this.mazeSolved = false
   }
 
   async onGenerateMaze() {
-    if (this.mazeGenerating) { console.log('maze is already being generated'); return }
-    if (this.mazeGenerated) { console.log('maze already generated'); return }
-    this.mazeGenerating = true
-    document.getElementById('generate-button').style.color = 'red'
-    await this.mazeRecursiveBacktracker.onInitStack()     // When you call a function, it goes on the call stack
-    await this.mazeRecursiveBacktracker.onFireoffAlgo()   // therefore you don't need to use Async/Await.
-    this.mazeGenerating = false
-    this.mazeGenerated = true
   }
 
   async onSolveMaze() {
-    if (!this.mazeGenerated) { console.log('maze not generated yet'); return }
-    if (this.mazeSolving) { console.log('maze is already being solved'); return }
-    if (this.mazeSolved) { console.log('maze already solved '); return }
-    this.mazeSolving = true
-    document.getElementById('solve-button').style.color = 'red'
-    await this.breadthfirst.init()
-    await this.breadthfirst.runAlgo()
-    this.mazeSolving = false
-    this.mazeSolved = true
   }
 
   onClearBoard() {
