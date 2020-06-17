@@ -134,28 +134,28 @@ export class DisplaycontrolService {
     document.getElementById(id).classList.add('discovered')   // directly draw state change to view
   }
 
-  private _delayTimer() {
-    return new Promise((resolve) => {
-      setTimeout ( () => {
-        resolve()
-      }, 30)                                    // set to 30 for production
-    })
-  }
+  // private _delayTimer() {
+  //   return new Promise((resolve) => {
+  //     setTimeout ( () => {
+  //       resolve()
+  //     }, 30)                                    // set to 30 for production
+  //   })
+  // }
 
-  async fillAll() {
-    for (let k=0; k<50; k++) {
-      for (let row = 0; row < 64; row++) {
-        for (let column = 0; column < 64; column++) {
-          const id: string = this.getId(row, column)
-          const randomColorCode = Math.floor(Math.random() * 4)
-          if (randomColorCode === 0) {document.getElementById(id).style.backgroundColor = '#000080' }
-          if (randomColorCode === 1) {document.getElementById(id).style.backgroundColor = '#582F00' }
-          if (randomColorCode === 2) {document.getElementById(id).style.backgroundColor = '#004E96' }
-          if (randomColorCode === 3) {document.getElementById(id).style.backgroundColor = '#AFA8BA' }
-        }
-      }
-      await this._delayTimer()
-    }
-  }
+  // async fillAll() {
+  //   for (let k=0; k<50; k++) {
+  //     for (let row = 0; row < 64; row++) {
+  //       for (let column = 0; column < 64; column++) {
+  //         const id: string = this.getId(row, column)
+  //         const randomColorCode = Math.floor(Math.random() * 4)
+  //         if (randomColorCode === 0) {document.getElementById(id).style.backgroundColor = '#000080' }
+  //         if (randomColorCode === 1) {document.getElementById(id).style.backgroundColor = '#582F00' }
+  //         if (randomColorCode === 2) {document.getElementById(id).style.backgroundColor = '#004E96' }
+  //         if (randomColorCode === 3) {document.getElementById(id).style.backgroundColor = '#AFA8BA' }
+  //       }
+  //     }
+  //     await this._delayTimer()
+  //   }
+  // }
 
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DisplaycontrolService } from 'src/app/displaycontrol.service';
-// import { BreadthfirstService } from 'src/app/algorithms/breadthfirst.service';
-// import { MazerecursivebacktrackerService } from 'src/app/algorithms/mazerecursivebacktracker.service';
+import { BubblesortService } from 'src/app/algorithms/bubblesort.service'
 import { Button } from 'protractor';
 
 @Component({
@@ -11,23 +9,13 @@ import { Button } from 'protractor';
 })
 export class ButtonsComponent implements OnInit {
 
-  generateButtonDepressed: boolean              // these ensure the user adheres to the intended
-  solveButtonDepressed: boolean                 // order for button selection, which is:
-  mazeGenerating: boolean                       // generate, golve, then clear in that order only
-  mazeGenerated: boolean                        //
-  mazeSolving: boolean                          //
-  mazeSolved: boolean                           //
-
-
   constructor(
-    private displayControl: DisplaycontrolService,
+    private bubbleSort: BubblesortService
     ) {}
 
   ngOnInit() {                                   // initalize everything on the board
-    this.displayControl.initBoard()
-    this.displayControl.redrawBoard()
-    this.generateButtonDepressed = false; this.mazeGenerated = false; this.mazeGenerating = false
-    this.solveButtonDepressed = false; this.mazeSolved = false
+    console.log('at ngOnInit in the component.')
+    this.bubbleSort.initBoard()
   }
 
   async onGenerateMaze() {
@@ -37,18 +25,13 @@ export class ButtonsComponent implements OnInit {
   }
 
   onClearBoard() {
-    if (!this.mazeSolved) { return }
-    this.displayControl.initBoard()
-    this.displayControl.markStart(2, 2)
-    this.displayControl.markFinish(17, 17)
-    this.displayControl.redrawBoard()
-    this.generateButtonDepressed = false; this.mazeGenerated = false; this.mazeGenerating = false
-    this.solveButtonDepressed = false; this.mazeSolved = false; this.mazeSolving = false
-    document.getElementById('generate-button').style.color = '#3ffd1c'
-    document.getElementById('solve-button').style.color = '#3ffd1c'
   }
 
   onFillAll() {
-    this.displayControl.fillAll()
+    this.bubbleSort.fillAll()
+  }
+
+  onSortARow() {
+    this.bubbleSort.sortRowColors()
   }
 }
