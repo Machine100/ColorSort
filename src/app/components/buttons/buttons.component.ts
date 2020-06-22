@@ -34,4 +34,8 @@ export class ButtonsComponent implements OnInit {
   onSortARow() {
     this.bubbleSort.sortRowColors()
   }
+
+  onDoMergeSort() {
+    this.bubbleSort.doMergeSort()
+  }
 }
